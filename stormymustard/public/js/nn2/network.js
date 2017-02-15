@@ -5,6 +5,7 @@ function Network(id) {
     this.outputNeurons = [];
     this.neurons = [];
     this.generation = 0;
+    //TODO add bias neuron back in
 
 }
 
@@ -30,7 +31,7 @@ Network.addNeuron = function (network, neuron) {
 };
 
 Network.fire = function (network, inputArray) {
-    //TODO set output for all input neurons all input neurons
+    //set output for all input neurons all input neurons
     for(var i in network.inputNeurons) {
         var n = network.inputNeurons[i];
         //  console.log('input id=' + n.id);
@@ -38,7 +39,7 @@ Network.fire = function (network, inputArray) {
         n.visited = true;
     }
 
-    //TODO calculate output all of the remaining neurons
+    //calculate output all of the remaining neurons
     var outputs = [];
     for(var i in network.outputNeurons) {
         var n = network.outputNeurons[i];

@@ -49,7 +49,7 @@ StormyMustardSimulation.prototype = (function () {
             var k = this.entityUIs.length;
 
             while(k--) {
-                this.entityUIs[k].calculate();
+                this.entityUIs[k].run();
             }
 
 

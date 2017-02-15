@@ -15,7 +15,6 @@ function Mutator() {
 Mutator.prototype = {
 
     /**
-     * TODO
      * @param network
      */
     mutateNetwork: function(network) {
@@ -27,7 +26,7 @@ Mutator.prototype = {
             var whichMutation = this._randomInteger(100, 0);
 
             if (whichMutation > 5) {
-                //TODO
+                //TODO pruning algo, might not be useful for this project
                 //Network.removeUselessNeurons(network);
             }
 
@@ -119,7 +118,7 @@ Mutator.prototype = {
         var connections = [];
 
         //First get all of the hidden and output neurons, to randomly select
-        //a neuron eligeable for a new input. Input neurons cannot take part.
+        //a neuron eligible for a new input. Input neurons cannot take part.
         neurons.push.apply(neurons, network.hiddenNeurons);
         neurons.push.apply(neurons, network.outputNeurons);
 
@@ -140,17 +139,11 @@ Mutator.prototype = {
         neurons.push.apply(neurons, network.inputNeurons);
         neurons.push.apply(neurons, network.hiddenNeurons);
 
-        // var newPotentialConnections = neurons.diff(alreadyConnections);
         var newPotentialConnections = neurons.filter(function(x) { return alreadyConnections.indexOf(x) < 0 })
 
-        //console.log('newPotentialConnections.length=' + newPotentialConnections.length);
         if (newPotentialConnections.length > 0) {
             randomNeuronIndex = this._randomInteger(newPotentialConnections.length, 0);
             var randomConnectingNeuron = newPotentialConnections[randomNeuronIndex];
-
-            //randomNeuron.connect(1, randomConnectingNeuron);
-            //TODO check if this should be random
-          //  console.log('randomNeuronid=' + randomNeuron.id);
             Network.connect(this._randomWeight(1, 0), randomNeuron, randomConnectingNeuron);
         }
 
@@ -170,6 +163,8 @@ Mutator.prototype = {
         neurons.push.apply(neurons, network.inputNeurons);
         neurons.push.apply(neurons, network.hiddenNeurons);
         neurons.push.apply(neurons, network.outputNeurons);
+
+        //TODO add bias neuron back in
        // neurons.push(network.bias);
 
         for (var i in neurons) {
