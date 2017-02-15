@@ -1,0 +1,24 @@
+{
+  "name": "stormymustard",
+  "homepage": "https://github.com/isknight/neuralnetnonsense",
+  "authors": [
+    "Israel Knight <israel.s.knight@gmail.com>"
+  ],
+  "description": "mustard plus storms",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "clone.js": "clone#^0.1.0",
+    "phaser": "^2.6.2",
+    "tone": "*",
+    "simple-uuid": "^1.0.1"
+  }
+}

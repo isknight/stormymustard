@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript" src="./bower_components/phaser/build/phaser.js"></script>
+    <script type="text/javascript" src="./bower_components/clone.js/clone.js"></script>
+    <script src="./bower_components/simple-uuid/uuid.js"></script>
+
+    <script type="text/javascript" src="./js/nn2/connection.js"></script>
+    <script type="text/javascript" src="./js/nn2/neuron.js"></script>
+    <script type="text/javascript" src="./js/nn2/network.js"></script>
+    <script type="text/javascript" src="./js/nn2/mutator.js"></script>
+
+    <script type="text/javascript" src="./js/nn2/util.js"></script>
+
+    <script type="text/javascript" src="js/stormy_mustard/stormy_mustard_simulation.js"></script>
+    <script type="text/javascript" src="js/stormy_mustard/visuals/entity_ui.js"></script>
+    <script type="text/javascript" src="js/stormy_mustard/visuals/electricity.js"></script>
+    <script type="text/javascript" src="js/stormy_mustard/stormy_mustard_config.js"></script>
+    <script type="text/javascript" src="js/stormy_mustard/stormy_mustard_entity.js"></script>
+    <script type="text/javascript" src="js/stormy_mustard/voice.js"></script>
+
+    <script type="text/javascript" src="./bower_components/tone/build/Tone.js"></script>
+
+
+
+</head>
+<body bgcolor="#000000">
+
+</body>
+
+<script type="text/javascript">
+    var game = new Phaser.Game(1200, 600, Phaser.CANVAS, 'entities', { preload: preload, create: create, update: update });
+
+    function preload() {
+    }
+
+    var upKey;
+    var downKey;
+
+    function getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    };
+
+
+    function create() {
+        game.time.advancedTiming = true;
+        var width = 600;
+        var height = 600;
+        var graphics = game.add.graphics(0, 0);
+
+        var key = getParameterByName('key');
+        if (key) {
+            console.log('key=' + key);
+            //simulation = SADSimulation.loadSimulation(key, width, height, graphics, dao);
+            //experiment = new Experiment()
+        } else {
+            //simulation = new SADSimulation(width, height, graphics);
+            //experiment = new Experiment(Experiment.SIMULATION_DRONES, width, height, graphics);
+            simulation = new StormyMustardSimulation(width, height, graphics, game);
+        }
+
+        speed = 1;
+
+
+        leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        mKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
+
+
+
+    }
+
+    function update() {
+
+        simulation.run();
+        simulation.render();
+
+        if (leftKey.justDown) {
+            simulation.handleKey('L');
+        }
+
+        if (rightKey.justDown) {
+            simulation.handleKey('R');
+        }
+
+        if (spaceKey.justDown) {
+            simulation.handleKey('S');
+        }
+
+        if (mKey.justDown) {
+            simulation.handleKey('M');
+        }
+
+    }
+
+
+
+</script>
+</html>
