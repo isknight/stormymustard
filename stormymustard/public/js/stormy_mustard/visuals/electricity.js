@@ -36,9 +36,11 @@ Electricity.fireWeapon = function (p1, p2, graphics, color, scale, colorScale) {
         //912CEE
         fireColor = 0x912cee;
     }
-    Electricity._drawLine(p1, p2, points, fireColor, 1, 1, graphics);
-    Electricity._drawLine(p1, p2, points, fireColor, 4 , .3, graphics);
-    Electricity._drawLine(p1, p2, points, fireColor, 18, .2, graphics);
+
+    fireColor = color;
+    Electricity._drawLine(p1, p2, points, fireColor, 1*scale, 1, graphics);
+    Electricity._drawLine(p1, p2, points, fireColor, 4*scale, .3, graphics);
+    Electricity._drawLine(p1, p2, points, fireColor, 18*scale, .2, graphics);
 
 };
 

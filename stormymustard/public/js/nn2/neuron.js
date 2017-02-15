@@ -1,6 +1,5 @@
 function Neuron(type, generation) {
 
-
     if (!generation) {
         generation = 0;
     }

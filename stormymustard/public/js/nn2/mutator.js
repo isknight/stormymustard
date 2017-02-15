@@ -1,14 +1,4 @@
-
-// if (module) module.exports = Mutator;
-//
-// var Neuron = require('./neuron.js');
-// var uuid = require('node-uuid');
-// var NNUtil = require('./nn_util.js');
-
-//Array.prototype.diff = function(a) {
-//    return this.filter(function(i) {return a.indexOf(i) < 0;});
-//};
-
+//TODO get away from OO for this
 function Mutator() {
 }
 

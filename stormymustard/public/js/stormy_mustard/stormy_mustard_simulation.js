@@ -6,6 +6,7 @@ function StormyMustardSimulation(width, height, graphics, game) {
     this.entityUIs = [];
     this.graphics = graphics;
     this.selectedIndex = 0;
+    this.tick = 0;
     this._init();
 };
 
@@ -33,6 +34,10 @@ StormyMustardSimulation.prototype = (function () {
 
         },
 
+        /**
+         * Positions the entity UI elements
+         * @private
+         */
         _positionEntityUI: function() {
             var x = 0;
             var y = this.height / 2;
@@ -40,8 +45,7 @@ StormyMustardSimulation.prototype = (function () {
             for (var i in this.entityUIs) {
                 this.entityUIs[i].x = x;
                 this.entityUIs[i].y = y;
-                x += 105;
-
+                x += 120;
             }
         },
 
@@ -49,18 +53,22 @@ StormyMustardSimulation.prototype = (function () {
             var k = this.entityUIs.length;
 
             while(k--) {
-                this.entityUIs[k].run();
+                this.entityUIs[k].run(this.tick);
             }
 
+            this.tick++;
 
         },
 
+        /**
+         * Renders the simulation
+         */
         render: function() {
             this.graphics.clear();
             var k = this.entityUIs.length;
 
             while(k--) {
-                this.entityUIs[k].render(this.graphics);
+                this.entityUIs[k].render(this.tick, this.graphics);
             }
 
             this._renderLogo(this.graphics);
@@ -90,7 +98,7 @@ StormyMustardSimulation.prototype = (function () {
             var i = points.length;
             while (i--) {
                 if (lastPoint) {
-                    Electricity.fireWeapon(lastPoint, points[i], graphics, 0xff0000, 1, 1);
+                    Electricity.fireWeapon(lastPoint, points[i], graphics, 0xffa500, 1, 1);
                 }
 
                 lastPoint = points[i];
@@ -117,12 +125,10 @@ StormyMustardSimulation.prototype = (function () {
                 case 'S':
                     var alreadyPlaying = this.entityUIs[this.selectedIndex].playing;
 
-                    var k = this.entityUIs.length;
-                    while (k--) {
-                        this.entityUIs[k].stop();
-                    }
                     if (!alreadyPlaying) {
                         this.entityUIs[this.selectedIndex].play();
+                    } else {
+                        this.entityUIs[this.selectedIndex].stop();
                     }
 
                     break;

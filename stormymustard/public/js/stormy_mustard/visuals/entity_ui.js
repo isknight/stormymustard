@@ -8,14 +8,12 @@ function EntityUI(x, y, entity) {
     this.playing = false;
     this.selected = false;
 
-    // this.button.onInputUp.add(this.click(), this);
-
 };
 
 
 EntityUI.prototype = (function () {
     return {
-        run: function () {
+        run: function (tick) {
             if (this.playing) {
                 // console.log('this.i=' + this.i);
                 if (this.i < StormyMustardConfig.MAX_VOICE_DURATION) {
@@ -27,7 +25,7 @@ EntityUI.prototype = (function () {
             }
         },
 
-        render: function (graphics) {
+        render: function (tick, graphics) {
 
             graphics.lineStyle(1, 0x00ff00);
             graphics.drawRect(this.x, this.y, this.width, this.height);
@@ -40,6 +38,54 @@ EntityUI.prototype = (function () {
 
             this._renderNN(graphics);
 
+            if (this.playing) {
+                this._renderPlaying2(tick, graphics);
+            }
+        },
+
+        _renderPlaying2: function(tick, graphics) {
+
+            var padding = 5;
+            var points = [];
+            points.push({x:this.x - padding, y:this.y - padding});
+            points.push({x:this.x + padding*2 + this.width, y:this.y - padding});
+            points.push({x:this.x + padding*2 + this.width, y:this.y + padding*2 + this.height});
+            points.push({x:this.x - padding, y:this.y + padding*2 + this.height});
+            points.push({x:this.x - padding, y:this.y - padding});
+
+            this._renderOutline(points, tick, graphics);
+
+        },
+
+        _renderOutline: function(points, tick, graphics) {
+            var lastPoint = null;
+
+            var i = points.length;
+            while (i--) {
+                if (lastPoint) {
+                    Electricity.fireWeapon(lastPoint, points[i], graphics, 0xffffff, 2, 1);
+                }
+
+                lastPoint = points[i];
+            }
+        },
+
+        _renderPlaying: function(tick, graphics) {
+            var startingPaddingSize = 2;
+            var endingPaddingSize = 20;
+            var alpha = (tick % 10) / 10;
+            var alphaStep = 1 / (endingPaddingSize / startingPaddingSize);
+
+            while (startingPaddingSize <= endingPaddingSize) {
+                graphics.lineStyle(1, 0xffffff, alpha);
+                graphics.drawRect(this.x - startingPaddingSize, this.y - startingPaddingSize, this.width + startingPaddingSize*2, this.height + startingPaddingSize*2);
+
+                startingPaddingSize++;
+                alpha -= alphaStep;
+                if (alpha < 0) {
+                    alpha = 1;
+                }
+            }
         },
 
         /**
