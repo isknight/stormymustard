@@ -105,7 +105,7 @@ class EntityUI {
         for (let i = 10; i < this.width - 10; i += 2) {
             let inputHeight = (i / this.width) * 2 - 1;
             for (let k in this.entity.voices) {
-                let output = Network.fire(this.entity.voices[k].nn, [inputHeight]);
+                let output = this.entity.voices[k].nn.fire([inputHeight]);
                 let rgb = [];
                 rgb[0] = ((output[0] + 1) / 2) * 255;
                 rgb[2] = ((output[1] + 1) / 2) * 255;

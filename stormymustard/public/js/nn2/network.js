@@ -12,28 +12,26 @@ class Network {
         //TODO add bias neuron back in
     }
 
-    static addNeuron(network, neuron) {
+    addNeuron(neuron) {
         switch (neuron.type) {
             case 'i':
-                network.inputNeurons.push(neuron);
+                this.inputNeurons.push(neuron);
                 break;
             case 'h':
-                network.hiddenNeurons.push(neuron);
+                this.hiddenNeurons.push(neuron);
                 break;
             case 'o':
-                network.outputNeurons.push(neuron);
+                this.outputNeurons.push(neuron);
                 break;
         }
-
-
-        network.neurons.push(neuron);
-        neuron.id = network.neurons.length - 1;
+        this.neurons.push(neuron);
+        neuron.id = this.neurons.length - 1;
     }
 
-    static fire(network, inputArray) {
+    fire(inputArray) {
         //set output for all input neurons all input neurons
-        for (var i in network.inputNeurons) {
-            var n = network.inputNeurons[i];
+        for (var i in this.inputNeurons) {
+            var n = this.inputNeurons[i];
             //  console.log('input id=' + n.id);
             n.output = inputArray[i];
             n.visited = true;
@@ -41,15 +39,14 @@ class Network {
 
         //calculate output all of the remaining neurons
         var outputs = [];
-        for (var i in network.outputNeurons) {
-            var n = network.outputNeurons[i];
-            outputs.push(Network.processOutputNeuron(n, network));
+        for (var i in this.outputNeurons) {
+            var n = this.outputNeurons[i];
+            outputs.push(Network.processOutputNeuron(n, this));
         }
 
         // console.log('network=' + network);
-        Network.reset(network);
+        Network.reset(this);
         return outputs;
-
     }
 
 
@@ -119,7 +116,7 @@ class Network {
         for (var i = 0; i < inputCount; i++) {
             var neuron = new Neuron('i', network.generation);
             inputNeurons.push(neuron);
-            Network.addNeuron(network, neuron);
+            network.addNeuron(neuron);
         }
 
         var outputNeurons = [];
@@ -127,7 +124,7 @@ class Network {
         for (var i = 0; i < outputCount; i++) {
             var neuron = new Neuron('o', network.generation);
             outputNeurons.push(neuron);
-            Network.addNeuron(network, neuron);
+            network.addNeuron(neuron);
         }
 
         for (var i in inputNeurons) {

@@ -71,7 +71,7 @@ function _randomlyAddNeuron(network) {
     }
 
     if(connectionA) {
-        Network.addNeuron(network, neuron);
+        network.addNeuron(neuron);
 
         //reattach the current connection to A to the new neuron
         connectionA.neuronId = neuron.id;

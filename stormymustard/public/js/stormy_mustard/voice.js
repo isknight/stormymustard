@@ -35,7 +35,7 @@ class Voice {
         var i = k % this.duration;
         var input = [];
         input.push((2 * (i / this.duration) - 1));
-        var output = Network.fire(this.nn, input);
+        var output = this.nn.fire(input);
         var frequency = ((output[0] / 2 * StormyMustardConfig.MAX_FREQUENCY));
         var volume = ((output[1] / 2 * StormyMustardConfig.MAX_VOLUME));
 
