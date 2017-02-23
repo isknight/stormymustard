@@ -28,17 +28,17 @@ class Network {
 
     fire(inputArray) {
         //set output for all input neurons all input neurons
-        for (var i in this.inputNeurons) {
-            var n = this.inputNeurons[i];
+        for (let i in this.inputNeurons) {
+            let n = this.inputNeurons[i];
             //  console.log('input id=' + n.id);
             n.output = inputArray[i];
             n.visited = true;
         }
 
         //calculate output all of the remaining neurons
-        var outputs = [];
-        for (var i in this.outputNeurons) {
-            var n = this.outputNeurons[i];
+        let outputs = [];
+        for (let i in this.outputNeurons) {
+            let n = this.outputNeurons[i];
             outputs.push(this._processOutputNeuron(n));
         }
 
@@ -49,20 +49,20 @@ class Network {
 
     _processOutputNeuron(neuron) {
 
-        var output = 0;
+        let output = 0;
         //If we haven't visted this, we will caluclate its output
         if (!neuron.visited) {
             neuron.visited = true;
             //we need to add the output of all neurons that connect to this one
-            var calculatingOutput = 0;
-            for (var i in neuron.connections) {
-                var connection = neuron.connections[i];
+            let calculatingOutput = 0;
+            for (let i in neuron.connections) {
+                let connection = neuron.connections[i];
                 if (!connection.fireCount) {
                     connection.fireCount = 0;
                 }
                 connection.fireCount = this.fireCount;
                 //upgrade
-                var n = this.neurons[connection.neuronId];
+                let n = this.neurons[connection.neuronId];
                 if (n.visited) {
                     calculatingOutput += n.output * connection.weight;
                 } else {
@@ -91,36 +91,36 @@ class Network {
     }
 
     static reset(network) {
-        var neurons = network.neurons;
-        for (var i in neurons) {
+        let neurons = network.neurons;
+        for (let i in neurons) {
             neurons[i].visited = false;
         }
     }
 
     static createRandomBaseNetwork(inputCount, outputCount) {
-        var network = new Network(UUID.generate());
+        let network = new Network(UUID.generate());
 
-        var inputNeurons = [];
+        let inputNeurons = [];
 
-        for (var i = 0; i < inputCount; i++) {
-            var neuron = new Neuron('i', network.generation);
+        for (let i = 0; i < inputCount; i++) {
+            let neuron = new Neuron('i', network.generation);
             inputNeurons.push(neuron);
             network.addNeuron(neuron);
         }
 
-        var outputNeurons = [];
+        let outputNeurons = [];
 
-        for (var i = 0; i < outputCount; i++) {
-            var neuron = new Neuron('o', network.generation);
+        for (let i = 0; i < outputCount; i++) {
+            let neuron = new Neuron('o', network.generation);
             outputNeurons.push(neuron);
             network.addNeuron(neuron);
         }
 
-        for (var i in inputNeurons) {
-            var neuron = inputNeurons[i];
-            for (var i in outputNeurons) {
-                var outputNeuron = outputNeurons[i];
-                var v = Network._randomWeight(100, 0);
+        for (let i in inputNeurons) {
+            let neuron = inputNeurons[i];
+            for (let i in outputNeurons) {
+                let outputNeuron = outputNeurons[i];
+                let v = Network._randomWeight(100, 0);
                 v = v / 100.0;
                 outputNeuron.connect(neuron, Network._randomWeight(1, 0));
             }
@@ -134,14 +134,14 @@ class Network {
     }
 
     static resetMaxOutputs(network) {
-        for (var i in network.hiddenNeurons) {
+        for (let i in network.hiddenNeurons) {
             network.hiddenNeurons[i].maxOutput = 0;
         }
     }
 
     static removeUselessNeurons(network) {
         //TODO check the max score for all hidden neurons. If it is under a threshold, kill the neuron
-        for (var i in network.hiddenNeurons) {
+        for (let i in network.hiddenNeurons) {
             //console.log('max=' + Math.abs(network.hiddenNeurons[i].maxOutput));
             if (Math.abs(network.hiddenNeurons[i].maxOutput) < .003) {
                 //console.log('death=' + Math.abs(network.hiddenNeurons[i].maxOutput));
@@ -151,7 +151,7 @@ class Network {
     }
 
     static removeNeuron(index, neuron, network) {
-        var neurons = [];
+        let neurons = [];
 
         neuron.type = 'd';
         neuron.connections = [];
@@ -159,10 +159,10 @@ class Network {
         neurons.push.apply(neurons, network.hiddenNeurons);
         neurons.push.apply(neurons, network.outputNeurons);
 
-        for (var i in neurons) {
-            var n = neurons[i];
-            for (var k in n.connections) {
-                var c = n.connections[k];
+        for (let i in neurons) {
+            let n = neurons[i];
+            for (let k in n.connections) {
+                let c = n.connections[k];
 
                 if (c.neuronId == neuron.id) {
                     n.connections.splice(k, 1);
