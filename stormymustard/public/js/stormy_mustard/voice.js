@@ -7,7 +7,7 @@ class Voice {
     }
 
     static build(id) {
-        let baseNetwork = Network.createRandomBaseNetwork(1, 2);
+        let baseNetwork = createRandomBaseNetwork(1, 2);
         let mutationCt = Util.randomInteger(0, StormyMustardConfig.MAX_MUTATIONS);
         while (mutationCt--) {
             mutateNetwork(baseNetwork);
