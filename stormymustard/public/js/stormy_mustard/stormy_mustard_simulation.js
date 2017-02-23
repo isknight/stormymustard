@@ -94,15 +94,8 @@ StormyMustardSimulation.prototype = (function () {
         },
 
         _renderOutline: function(points, graphics) {
-            var lastPoint = null;
-
-            var i = points.length;
-            while (i--) {
-                if (lastPoint) {
-                    Electricity.fireWeapon(lastPoint, points[i], graphics, 0xffa500, 1, 1);
-                }
-
-                lastPoint = points[i];
+            for(let i = points.length-1; i > 0; i--){
+                Electricity.fireWeapon(points[i], points[i-1], graphics, 0xffa500, 1, 1);
             }
         },
 
