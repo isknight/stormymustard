@@ -25,7 +25,7 @@ function mutateNetwork(network) {
             }
         }
         //console.log('neuron count=' + network.neurons.length);
-        Network.resetMaxOutputs(network);
+        network.resetMaxOutputs();
 }
 
 /**

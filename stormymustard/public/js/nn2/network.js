@@ -126,9 +126,9 @@ class Network {
         return (Math.random() * (max * 2 - min) + min) - max;
     }
 
-    static resetMaxOutputs(network) {
-        for (let i in network.hiddenNeurons) {
-            network.hiddenNeurons[i].maxOutput = 0;
+    resetMaxOutputs() {
+        for (let i in this.hiddenNeurons) {
+            this.hiddenNeurons[i].maxOutput = 0;
         }
     }
 
