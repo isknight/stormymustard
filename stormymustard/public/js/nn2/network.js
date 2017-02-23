@@ -132,13 +132,13 @@ class Network {
         }
     }
 
-    static removeUselessNeurons(network) {
+    removeUselessNeurons() {
         //TODO check the max score for all hidden neurons. If it is under a threshold, kill the neuron
-        for (let i in network.hiddenNeurons) {
+        for (let i in this.hiddenNeurons) {
             //console.log('max=' + Math.abs(network.hiddenNeurons[i].maxOutput));
-            if (Math.abs(network.hiddenNeurons[i].maxOutput) < .003) {
+            if (Math.abs(this.hiddenNeurons[i].maxOutput) < .003) {
                 //console.log('death=' + Math.abs(network.hiddenNeurons[i].maxOutput));
-                Network.removeNeuron(i, network.hiddenNeurons[i], network);
+                Network.removeNeuron(i, this.hiddenNeurons[i], this);
             }
         }
     }

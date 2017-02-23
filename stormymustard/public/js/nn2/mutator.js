@@ -9,7 +9,7 @@ function mutateNetwork(network) {
 
             if (whichMutation > 5) {
                 //TODO pruning algo, might not be useful for this project
-                //Network.removeUselessNeurons(network);
+                //network.removeUselessNeurons();
             }
 
             if (whichMutation > 0 && whichMutation < 5) {
