@@ -15,7 +15,7 @@ StormyMustardEntity.prototype = (function() {
             var voiceCount = Util.randomInteger(1, StormyMustardConfig.MAX_VOICES);
 
             while (voiceCount--) {
-                var v = new Voice(voiceCount);
+                var v = Voice.build(voiceCount);
                 this.voices.push(v);
             }
 

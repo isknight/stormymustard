@@ -1,16 +1,21 @@
 
 class Voice {
 
-  constructor(id){
+  constructor(id, nn, duration){
     this.id = id;
-    //TODO: Migrate to a builder
-    this.nn = Network.createRandomBaseNetwork(1, 2);
-    var k = Util.randomInteger(0, StormyMustardConfig.MAX_MUTATIONS);
-    var m = new Mutator();
-    while (k--) {
-        m.mutateNetwork(this.nn);
+    this.nn = nn;
+    this.duration = duration;
+  }
+
+  static build(id){
+    let baseNetwork = Network.createRandomBaseNetwork(1, 2);
+    let mutationCt = Util.randomInteger(0, StormyMustardConfig.MAX_MUTATIONS);
+    let mutator = new Mutator();
+    while (mutationCt--) {
+        mutator.mutateNetwork(baseNetwork);
     }
-    this.duration = Util.randomInteger(StormyMustardConfig.MIN_VOICE_DURATION, StormyMustardConfig.MAX_VOICE_DURATION);
+    let duration = Util.randomInteger(StormyMustardConfig.MIN_VOICE_DURATION, StormyMustardConfig.MAX_VOICE_DURATION);
+    return new Voice(id, baseNetwork, duration);
   }
 
   start() {
