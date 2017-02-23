@@ -43,7 +43,7 @@ class Network {
         }
 
         // console.log('network=' + network);
-        Network.reset(this);
+        this.reset();
         return outputs;
     }
 
@@ -76,7 +76,7 @@ class Network {
         } else {
             output = neuron.output;
         }
-        output = Network.tanh(output);
+        output = Math.tanh(output);
         if (Math.abs(output) > neuron.maxOutput) {
             neuron.maxOutput = Math.abs(output);
         }
@@ -86,15 +86,8 @@ class Network {
         return output;
     }
 
-    static tanh(x) {
-        return Math.tanh(x);
-    }
-
-    static reset(network) {
-        let neurons = network.neurons;
-        for (let i in neurons) {
-            neurons[i].visited = false;
-        }
+    reset() {
+        this.neurons.forEach(n => n.visited = false);
     }
 
     static createRandomBaseNetwork(inputCount, outputCount) {
