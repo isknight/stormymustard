@@ -113,17 +113,13 @@ class Network {
             let neuron = inputNeurons[i];
             for (let i in outputNeurons) {
                 let outputNeuron = outputNeurons[i];
-                let v = Network._randomWeight(100, 0);
+                let v = Util.randomWeight(100, 0);
                 v = v / 100.0;
-                outputNeuron.connect(neuron, Network._randomWeight(1, 0));
+                outputNeuron.connect(neuron, Util.randomWeight(1, 0));
             }
         }
         return network;
 
-    }
-
-    static _randomWeight(max, min) {
-        return (Math.random() * (max * 2 - min) + min) - max;
     }
 
     resetMaxOutputs() {
