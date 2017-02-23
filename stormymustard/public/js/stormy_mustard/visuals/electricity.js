@@ -18,15 +18,15 @@ class Electricity {
             colorScale = 0;
         }
 
-        var points = Electricity._generatePoints(p1, p2, 20);
+        let points = Electricity._generatePoints(p1, p2, 20);
 
         if (!color) {
             color = 0xffffff;
         }
 
-        var modifier = 4;
+        let modifier = 4;
 
-        var fireColor = 0xffffff;
+        let fireColor = 0xffffff;
 
 
         if (colorScale > 0) {
@@ -53,27 +53,27 @@ class Electricity {
      * generates points for the synapse arc
      */
     static _generatePoints(p1, p2, segments) {
-        var points = [];
-        var angle = Electricity._angleBetweenPoints(p1, p2);
-        var prevX = p1.x;
-        var prevY = p1.y;
-        var distance = Electricity._distanceBetweenPoints({
+        let points = [];
+        let angle = Electricity._angleBetweenPoints(p1, p2);
+        let prevX = p1.x;
+        let prevY = p1.y;
+        let distance = Electricity._distanceBetweenPoints({
             x: prevX,
             y: prevY
         }, p2);
-        var length = distance / segments;
+        let length = distance / segments;
 
-        var mutation = 150;
+        let mutation = 150;
 
-        var giveUp = 100;
+        let giveUp = 100;
 
         while (distance > length && giveUp >= 0) {
-            var randomAngleMutator = Util.randomInteger(0, mutation);
+            let randomAngleMutator = Util.randomInteger(0, mutation);
             randomAngleMutator -= (mutation / 2);
             randomAngleMutator = randomAngleMutator / 200;
 
-            var x2 = prevX + Math.cos(angle + randomAngleMutator) * length;
-            var y2 = prevY + Math.sin(angle + randomAngleMutator) * length;
+            let x2 = prevX + Math.cos(angle + randomAngleMutator) * length;
+            let y2 = prevY + Math.sin(angle + randomAngleMutator) * length;
             prevX = x2;
             prevY = y2;
 
@@ -103,8 +103,8 @@ class Electricity {
         graphics.moveTo(p1.x, p1.y);
 
 
-        for (var i in points) {
-            var point = points[i];
+        for (let i in points) {
+            let point = points[i];
             graphics.lineTo(point.x, point.y);
         }
 
