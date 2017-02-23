@@ -1,5 +1,25 @@
 class Electricity {
 
+    static render(graphics){
+      let points = [
+        {x:149, y:22},
+        {x:191, y:25},
+        {x:202, y:126},
+        {x:181, y:118},
+        {x:183, y:185},
+        {x:170, y:182},
+        {x:169, y:268},
+        {x:142, y:166},
+        {x:155, y:166},
+        {x:141, y:87},
+        {x:159, y:92},
+        {x:149, y:22},
+      ];
+      for(let i = 0; i < points.length-1; i++){
+          Electricity.fireWeapon(points[i], points[i+1], graphics, 0xffa500, 1, 1);
+      }
+    }
+
     static fireWeapon(p1, p2, graphics, color, scale, colorScale) {
 
         if (!scale) {
