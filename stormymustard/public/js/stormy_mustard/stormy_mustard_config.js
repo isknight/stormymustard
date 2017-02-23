@@ -13,4 +13,4 @@ StormyMustardConfig.MAX_MUTATIONS = 100;
 
 
 StormyMustardConfig.MAX_FREQUENCY = 8000;
-StormyMustardConfig.MAX_VOLUME = 10;
+StormyMustardConfig.MAX_VOLUME = 0;

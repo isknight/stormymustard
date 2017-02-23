@@ -7,6 +7,23 @@ function StormyMustardSimulation(width, height, graphics, game) {
     this.graphics = graphics;
     this.selectedIndex = 0;
     this.tick = 0;
+
+    let elecPoints = [
+      {x:149, y:22},
+      {x:191, y:25},
+      {x:202, y:126},
+      {x:181, y:118},
+      {x:183, y:185},
+      {x:170, y:182},
+      {x:169, y:268},
+      {x:142, y:166},
+      {x:155, y:166},
+      {x:141, y:87},
+      {x:159, y:92},
+      {x:149, y:22},
+    ];
+    this.lightningBolt = new Electricity(elecPoints);
+
     this._init();
 };
 
@@ -70,7 +87,7 @@ StormyMustardSimulation.prototype = (function () {
                 this.entityUIs[k].render(this.tick, this.graphics);
             }
 
-            Electricity.render(this.graphics);
+            this.lightningBolt.render(this.graphics, 0xffa500, 1, 1);
         },
 
         handleKey: function(key) {
