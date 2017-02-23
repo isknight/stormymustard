@@ -47,10 +47,6 @@ class Network {
         return outputs;
     }
 
-    static connect(weight, fromNeuron, toNeuron) {
-        fromNeuron.connect(toNeuron, weight);
-    }
-
     _processOutputNeuron(neuron) {
 
         var output = 0;
@@ -126,7 +122,7 @@ class Network {
                 var outputNeuron = outputNeurons[i];
                 var v = Network._randomWeight(100, 0);
                 v = v / 100.0;
-                Network.connect(Network._randomWeight(1, 0), outputNeuron, neuron);
+                outputNeuron.connect(neuron, Network._randomWeight(1, 0));
             }
         }
         return network;

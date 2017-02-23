@@ -77,7 +77,7 @@ function _randomlyAddNeuron(network) {
         connectionA.neuronId = neuron.id;
 
         //create a new connection between the new neuron and B
-        Network.connect(this._randomWeight(1, 0), neuron, neuronA);
+        neuron.connect(neuronA, this._randomWeight(1, 0));
     } else {
         console.log('failed to find connection');
     }
@@ -115,7 +115,7 @@ function _randomlyAddSynapseWithRandomWeight(network) {
     if (newPotentialConnections.length > 0) {
         randomNeuronIndex = this._randomInteger(newPotentialConnections.length, 0);
         let randomConnectingNeuron = newPotentialConnections[randomNeuronIndex];
-        Network.connect(this._randomWeight(1, 0), randomNeuron, randomConnectingNeuron);
+        randomNeuron.connect(randomConnectingNeuron, this._randomWeight(1, 0));
     }
 }
 
