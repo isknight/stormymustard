@@ -6,9 +6,7 @@ function EntityUI(x, y, entity) {
     this.entity = entity;
     this.playing = false;
     this.selected = false;
-
 };
-
 
 EntityUI.prototype = (function () {
     return {
@@ -86,11 +84,6 @@ EntityUI.prototype = (function () {
             }
         },
 
-        /**
-         *
-         * @param graphics
-         * @private
-         */
         _renderNN: function (graphics) {
             var rows = this.entity.voices.length;
             var rowHeight = (this.height - 10) / rows;
