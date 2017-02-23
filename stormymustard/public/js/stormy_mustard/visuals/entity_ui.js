@@ -3,7 +3,6 @@ function EntityUI(x, y, entity) {
     this.y = y;
     this.width = 100;
     this.height = 100;
-
     this.entity = entity;
     this.playing = false;
     this.selected = false;
@@ -15,7 +14,6 @@ EntityUI.prototype = (function () {
     return {
         run: function (tick) {
             if (this.playing) {
-                // console.log('this.i=' + this.i);
                 if (this.i < StormyMustardConfig.MAX_VOICE_DURATION) {
                     this.entity.run(this.i);
                 } else {
