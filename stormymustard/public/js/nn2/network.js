@@ -41,7 +41,7 @@ class Network {
         var outputs = [];
         for (var i in this.outputNeurons) {
             var n = this.outputNeurons[i];
-            outputs.push(Network.processOutputNeuron(n, this));
+            outputs.push(this._processOutputNeuron(n));
         }
 
         // console.log('network=' + network);
@@ -55,7 +55,7 @@ class Network {
         outputNeuron.connections.push(connection);
     }
 
-    static processOutputNeuron(neuron, network) {
+    _processOutputNeuron(neuron) {
 
         var output = 0;
         //If we haven't visted this, we will caluclate its output
@@ -68,14 +68,13 @@ class Network {
                 if (!connection.fireCount) {
                     connection.fireCount = 0;
                 }
-                connection.fireCount = network.fireCount;
-                //var n = NNUtil.getNeuronById(connection.neuronId, network);
+                connection.fireCount = this.fireCount;
                 //upgrade
-                var n = network.neurons[connection.neuronId]; //]connection.getNeuron(network);
+                var n = this.neurons[connection.neuronId];
                 if (n.visited) {
                     calculatingOutput += n.output * connection.weight;
                 } else {
-                    calculatingOutput += Network.processOutputNeuron(n, network) * connection.weight;
+                    calculatingOutput += this._processOutputNeuron(n) * connection.weight;
                 }
             }
             neuron.output = calculatingOutput;
@@ -89,11 +88,9 @@ class Network {
         if (Math.abs(output) > neuron.maxOutput) {
             neuron.maxOutput = Math.abs(output);
         }
-
         //if (Math.abs(output) > 1) {
-        network.fireCount++;
+        this.fireCount++;
         //}
-
         return output;
     }
 
