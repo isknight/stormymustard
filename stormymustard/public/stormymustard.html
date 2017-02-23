@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="UTF-8">
     <title></title>
@@ -24,8 +22,6 @@
     <script type="text/javascript" src="js/stormy_mustard/visuals/electricity_ui.js"></script>
     <script type="text/javascript" src="js/stormy_mustard/stormy_mustard_config.js"></script>
     <script type="text/javascript" src="./bower_components/tone/build/Tone.js"></script>
-
-
 
 </head>
 <body bgcolor="#000000">
@@ -73,14 +69,10 @@
 
         speed = 1;
 
-
         leftKey = game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         rightKey = game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         mKey = game.input.keyboard.addKey(Phaser.Keyboard.M);
-
-
-
     }
 
     function update() {
@@ -103,10 +95,6 @@
         if (mKey.justDown) {
             simulation.handleKey('M');
         }
-
     }
-
-
-
 </script>
 </html>
