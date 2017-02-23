@@ -16,11 +16,11 @@ class Electricity {
         {x:149, y:22},
       ];
       for(let i = 0; i < points.length-1; i++){
-          Electricity.fireWeapon(points[i], points[i+1], graphics, 0xffa500, 1, 1);
+          Electricity._drawSpark(points[i], points[i+1], graphics, 0xffa500, 1, 1);
       }
     }
 
-    static fireWeapon(p1, p2, graphics, color, scale, colorScale) {
+    static _drawSpark(p1, p2, graphics, color, scale, colorScale) {
 
         if (!scale) {
             scale = 0;
@@ -61,7 +61,6 @@ class Electricity {
         Electricity._drawLine(p1, p2, points, fireColor, 1 * scale, 1, graphics);
         Electricity._drawLine(p1, p2, points, fireColor, 4 * scale, .3, graphics);
         Electricity._drawLine(p1, p2, points, fireColor, 18 * scale, .2, graphics);
-
     }
 
     static _rgb2hex(rgb) {
@@ -117,12 +116,9 @@ class Electricity {
         return points;
     }
 
-
     static _drawLine(p1, p2, points, color, width, opacity, graphics) {
         graphics.lineStyle(width, color, opacity);
         graphics.moveTo(p1.x, p1.y);
-
-
         for (let i in points) {
             let point = points[i];
             graphics.lineTo(point.x, point.y);

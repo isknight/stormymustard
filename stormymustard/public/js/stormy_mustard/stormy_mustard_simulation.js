@@ -71,7 +71,6 @@ StormyMustardSimulation.prototype = (function () {
             }
 
             Electricity.render(this.graphics);
-
         },
 
         handleKey: function(key) {
