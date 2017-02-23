@@ -10,9 +10,8 @@ class Voice {
   static build(id){
     let baseNetwork = Network.createRandomBaseNetwork(1, 2);
     let mutationCt = Util.randomInteger(0, StormyMustardConfig.MAX_MUTATIONS);
-    let mutator = new Mutator();
     while (mutationCt--) {
-        mutator.mutateNetwork(baseNetwork);
+        mutateNetwork(baseNetwork);
     }
     let duration = Util.randomInteger(StormyMustardConfig.MIN_VOICE_DURATION, StormyMustardConfig.MAX_VOICE_DURATION);
     return new Voice(id, baseNetwork, duration);
