@@ -138,19 +138,19 @@ class Network {
             //console.log('max=' + Math.abs(network.hiddenNeurons[i].maxOutput));
             if (Math.abs(this.hiddenNeurons[i].maxOutput) < .003) {
                 //console.log('death=' + Math.abs(network.hiddenNeurons[i].maxOutput));
-                Network.removeNeuron(i, this.hiddenNeurons[i], this);
+                this._removeNeuron(this.hiddenNeurons[i]);
             }
         }
     }
 
-    static removeNeuron(index, neuron, network) {
+    _removeNeuron(neuron) {
         let neurons = [];
 
         neuron.type = 'd';
         neuron.connections = [];
 
-        neurons.push.apply(neurons, network.hiddenNeurons);
-        neurons.push.apply(neurons, network.outputNeurons);
+        neurons.push.apply(neurons, this.hiddenNeurons);
+        neurons.push.apply(neurons, this.outputNeurons);
 
         for (let i in neurons) {
             let n = neurons[i];
