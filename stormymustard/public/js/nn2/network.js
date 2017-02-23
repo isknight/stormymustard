@@ -1,7 +1,5 @@
 class Network {
 
-    //TODO: Rethink some of this -- weirdly static!
-
     constructor(id) {
         this.id = id;
         this.inputNeurons = [];
@@ -49,10 +47,8 @@ class Network {
         return outputs;
     }
 
-
-    static connect(weight, outputNeuron, neuron) {
-        var connection = new Connection(weight, neuron);
-        outputNeuron.connections.push(connection);
+    static connect(weight, fromNeuron, toNeuron) {
+        fromNeuron.connect(toNeuron, weight);
     }
 
     _processOutputNeuron(neuron) {
