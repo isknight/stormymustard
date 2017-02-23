@@ -152,7 +152,6 @@ StormyMustardSimulation.prototype = (function () {
             this.entityUIs.push(selectedEntity);
             var m = 2;
             var i = 1;
-            var mutator = new Mutator();
             while (this.entityUIs.length < StormyMustardConfig.ENTITY_COUNT) {
                 var newEntity = Object.clone(selectedEntity, true);
 
@@ -160,8 +159,7 @@ StormyMustardSimulation.prototype = (function () {
                     for (var j in newEntity.entity.voices) {
                         //console.log('mutating');
                         var nn = newEntity.entity.voices[j].nn;
-                        mutator.mutateNetwork(nn);
-
+                        mutateNetwork(nn);
                     }
                 }
                 m++;
