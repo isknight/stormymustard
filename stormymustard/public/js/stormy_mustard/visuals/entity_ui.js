@@ -40,31 +40,20 @@ class EntityUI {
     }
 
     _renderPlaying2(tick, graphics) {
+      //TODO: optimize by not recomputing and saving when playing, unless repositioning is desired...
+      let outline = new Electricity(this._computePoints());
+      outline.render(graphics, 0xffffff, 2, 1);
+    }
 
-        let padding = 5;
-        let points = [];
-        points.push({
-            x: this.x - padding,
-            y: this.y - padding
-        });
-        points.push({
-            x: this.x + padding * 2 + this.width,
-            y: this.y - padding
-        });
-        points.push({
-            x: this.x + padding * 2 + this.width,
-            y: this.y + padding * 2 + this.height
-        });
-        points.push({
-            x: this.x - padding,
-            y: this.y + padding * 2 + this.height
-        });
-        points.push({
-            x: this.x - padding,
-            y: this.y - padding
-        });
-
-        this._renderOutline(points, tick, graphics);
+    _computePoints(){
+      let padding = 5;
+      return [
+        { x: this.x - padding, y: this.y - padding },
+        { x: this.x + padding * 2 + this.width, y: this.y - padding },
+        { x: this.x + padding * 2 + this.width, y: this.y + padding * 2 + this.height },
+        { x: this.x - padding, y: this.y + padding * 2 + this.height },
+        { x: this.x - padding, y: this.y - padding },
+      ];
     }
 
     _renderOutline(points, tick, graphics) {
@@ -73,7 +62,7 @@ class EntityUI {
         let i = points.length;
         while (i--) {
             if (lastPoint) {
-                Electricity.fireWeapon(lastPoint, points[i], graphics, 0xffffff, 2, 1);
+                Electricity._drawSpark(lastPoint, points[i], graphics, 0xffffff, 2, 1);
             }
 
             lastPoint = points[i];
